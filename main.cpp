@@ -1,24 +1,47 @@
 #include <iostream>
 #include <unistd.h>
 #include <getopt.h>
+#include <unordered_set>
 #include <filesystem>
 #include <fstream>
 
-namespace fs = std::filesystem;
+// namespace fs = std::filesystem;
+
+// Long options with getopt_long
+static struct option longopts[] {
+	{ "help", no_argument, 0, '?' },
+	{ "verbose", no_argument, 0, 'v' },
+	{ "file", required_argument, 0, 'f' },
+	{ 0, 0, 0, 0 }
+};
 
 void printUsage();
 
 int main(int argc, char *argv[]) {
-	if (argc <= 1 || argc > 2) {
+	if (argc <= 1) {
 		printUsage();
 		return 0;
 	}
 
-	// Get all options and flip flags
-	parseOptions();
+	int opt { -1 };
+	int optIdx {};
+	while ((opt = getopt_long(argc, argv, "f:v", longopts, &optIdx)) != -1) {
+		switch (opt) {
+			case 'f':
+				std::cout << "file path: " << optarg << '\n';
+				break;
+			case 'v':
+				std::cout << "verbose is true " << '\n';
+				break;
+			case '?':
+				printUsage();
+				break;
+		}
+	}
 
-	// Open file and print every line
-
+	for (int i = optIdx; i < argc; ++i) {
+		std::cout << "non opt arg: " << argv[i] << '\n';
+	}
 }
 
 void printUsage() {
@@ -26,21 +49,3 @@ void printUsage() {
 	std::cout << "Try: 'crepp --help' for more information." << '\n';
 }
 
-void parseOptions(int argc, char *argv[]) {
-	int opt { -1 };
-	while ((opt = getopt(argc, argv, "f:v")) != -1) {
-		switch (opt) {
-			case 'f':
-				// use optarg as path to file
-				std::cout << "file path: " << optarg << '\n';
-			case 'v':
-			case '?':
-				printUsage();
-				break;
-		}
-	}
-}
-
-void printHelp() {
-
-}
