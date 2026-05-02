@@ -7,14 +7,6 @@
 
 // namespace fs = std::filesystem;
 
-// Long options with getopt_long
-static struct option longopts[] {
-	{ "help", no_argument, 0, '?' },
-	{ "verbose", no_argument, 0, 'v' },
-	{ "file", required_argument, 0, 'f' },
-	{ 0, 0, 0, 0 }
-};
-
 void printUsage();
 
 int main(int argc, char *argv[]) {
@@ -23,15 +15,23 @@ int main(int argc, char *argv[]) {
 		return 0;
 	}
 
+	// Long options with getopt_long
+	const struct option longopts[] {
+		{ "help", no_argument, 0, '?' },
+		{ "version", no_argument, 0, 'v' },
+		{ "file", required_argument, 0, 'f' },
+		{ 0, 0, 0, 0 }
+	};
+
 	int opt { -1 };
 	int optIdx {};
 	while ((opt = getopt_long(argc, argv, "f:v", longopts, &optIdx)) != -1) {
 		switch (opt) {
 			case 'f':
-				std::cout << "file path: " << optarg << '\n';
+				std::cout << "f: file path: " << optarg << '\n';
 				break;
 			case 'v':
-				std::cout << "verbose is true " << '\n';
+				std::cout << "v: version 1.0" << '\n';
 				break;
 			case '?':
 				printUsage();
