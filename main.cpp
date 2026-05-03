@@ -8,6 +8,7 @@
 // namespace fs = std::filesystem;
 
 void printUsage();
+void printHelp();
 
 int main(int argc, char *argv[]) {
 	if (argc <= 1) {
@@ -18,22 +19,25 @@ int main(int argc, char *argv[]) {
 	// Long options with getopt_long
 	const struct option longopts[] {
 		{ "help", no_argument, 0, '?' },
-		{ "version", no_argument, 0, 'v' },
+		{ "version", no_argument, 0, 'V' },
 		{ "file", required_argument, 0, 'f' },
 		{ 0, 0, 0, 0 }
 	};
 
 	int opt { -1 };
 	int optIdx {};
-	while ((opt = getopt_long(argc, argv, "f:v", longopts, &optIdx)) != -1) {
+	while ((opt = getopt_long(argc, argv, "f:V", longopts, &optIdx)) != -1) {
 		switch (opt) {
 			case 'f':
 				std::cout << "f: file path: " << optarg << '\n';
 				break;
-			case 'v':
-				std::cout << "v: version 1.0" << '\n';
+			case 'V':
+				std::cout << "V: version 1.0" << '\n';
 				break;
 			case '?':
+				printHelp();
+				break;
+			default:
 				printUsage();
 				break;
 		}
