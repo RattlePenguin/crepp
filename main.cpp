@@ -53,8 +53,14 @@ int main(int argc, char *argv[]) {
 		// check if arg is a file
 		std::ifstream file(argv[i]);
 
+		if (!file) continue;
+
+		std::string text {};
+		while (getline(file, text)) {
+			std::cout << text << '\n';
+		}
+
 		// get each line and substring check
-		//
 		file.close();
 	}
 	
