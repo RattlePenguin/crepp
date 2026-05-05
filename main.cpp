@@ -57,7 +57,9 @@ int main(int argc, char *argv[]) {
 
 		std::string text {};
 		while (getline(file, text)) {
-			std::cout << text << '\n';
+			if (text.find(pattern) != std::string::npos) {
+				std::cout << text << '\n';
+			}
 		}
 
 		// get each line and substring check
