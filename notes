@@ -1,0 +1,8 @@
+# TODOs
+color highlighting for specific part of line
+
+if given filename is a directory, quit out unless -r
+
+-f to give path to a file or directory
+-v for invert matching
+-r for recursive searching
