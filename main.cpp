@@ -44,12 +44,10 @@ int main(int argc, char *argv[]) {
 		}
 	}
 
-	// for each file name
-	// print every line for now
-	std::cout << "optind: " << optind << '\n'; // optind is start of non-opt args
-	
 	// first non-opt arg is PATTERN
 	std::string_view pattern { argv[optind] };
+
+	// every subsequent arg is a filename
 	for (int i = optind + 1; i < argc; ++i) {
 		// check if arg is a file
 		std::ifstream file(argv[i]);
