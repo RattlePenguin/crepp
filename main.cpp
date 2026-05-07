@@ -1,3 +1,4 @@
+#include <cstdint>
 #include <iostream>
 #include <unistd.h>
 #include <getopt.h>
@@ -5,7 +6,7 @@
 #include <filesystem>
 #include <fstream>
 
-// namespace fs = std::filesystem;
+const std::string _name { "crepp" };
 
 void printUsage();
 void printHelp();
@@ -53,7 +54,9 @@ int main(int argc, char *argv[]) {
 		// check if arg is a file
 		std::ifstream file(argv[i]);
 
-		if (!file) continue;
+		if (!file) {
+			std::cout << _name << ": " << argv[i] << ": No such file or directory\n";
+		}
 
 		std::string text {};
 		while (getline(file, text)) {
@@ -81,3 +84,4 @@ void printHelp() {
 
 	// Options
 }
+
