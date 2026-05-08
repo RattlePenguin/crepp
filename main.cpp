@@ -47,6 +47,17 @@ int main(int argc, char *argv[]) {
 	// first non-opt arg is PATTERN
 	std::string_view pattern { argv[optind] };
 
+	// if no subsequent args, read from stdin
+	if (optind + 1 >= argc) {
+		std::string text {};
+		while (getline(std::cin, text)) {
+			if (text.find(pattern) != std::string::npos) {
+				std::cout << text << '\n';
+			}
+		}
+		return 0;
+	}
+
 	// every subsequent arg is a filename
 	for (int i = optind + 1; i < argc; ++i) {
 		// check if arg is a file
@@ -82,4 +93,3 @@ void printHelp() {
 
 	// Options
 }
-
