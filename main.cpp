@@ -12,10 +12,13 @@ void printUsage();
 void printHelp();
 
 int main(int argc, char *argv[]) {
+	// if no args are given
 	if (argc <= 1) {
 		printUsage();
 		return 0;
 	}
+
+	// get options
 
 	// Long options with getopt_long
 	const struct option longopts[] {

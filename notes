@@ -6,3 +6,9 @@ if given filename is a directory, quit out unless -r
 -f to give path to a file or directory
 -v for invert matching
 -r for recursive searching
+
+Idea since performing crepp on a file is the same, just given multiple files
+Make class CreppInstance
+- Keep track of flags like -v, -e
+- For each file arg, just call member function on it
+	- Member func will check whether its a file or not
