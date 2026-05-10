@@ -12,3 +12,5 @@ Make class CreppInstance
 - Keep track of flags like -v, -e
 - For each file arg, just call member function on it
 	- Member func will check whether its a file or not
+
+Give error for flag not found
