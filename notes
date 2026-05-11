@@ -3,9 +3,13 @@ color highlighting for specific part of line
 
 if given filename is a directory, quit out unless -r
 
--f to give path to a file or directory
+-f take PATTERN from file
+	separated by newlines, multiple matching
+	can use multiple files aggregately
 -v for invert matching
+	return lines that don't match
 -r for recursive searching
+	if given a directory perform on all files within
 
 Idea since performing crepp on a file is the same, just given multiple files
 Make class CreppInstance
