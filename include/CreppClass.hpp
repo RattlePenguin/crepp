@@ -5,7 +5,11 @@ class CreppClass {
 public:
 
 private:
+	// Toggles
 	bool vInvert {};
+	bool recursive {};
+
+	// PATTERN
 	std::vector<std::string> patterns {};
 
 	/** 
@@ -15,6 +19,6 @@ private:
 	 *  If multiple files were given, filename should be prepended to line (WIP)
 	 *  If a directory is given and -r (recursive) was not enabled, produce error
 	 */
-	void getOptions(int argc, char *argv[], )
+	void getOptions(int argc, char *argv[]);
 	void crepp(std::string filepath);
 };
