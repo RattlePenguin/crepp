@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-// Forward declarations 
+// Forward declarations
 void printUsage();
 void printHelp();
 
@@ -34,7 +34,7 @@ void CreppClass::getOptions(int argc, char *argv[]) {
 	}
 }
 
-/** 
+/**
  *  Prints usage message.
  */
 void printUsage() {
@@ -42,7 +42,7 @@ void printUsage() {
 	std::cout << "Try: 'crepp --help' for more information." << '\n';
 }
 
-/** 
+/**
  *  Prints help message.
  */
 void printHelp() {
