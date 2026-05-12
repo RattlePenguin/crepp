@@ -18,35 +18,6 @@ int main(int argc, char *argv[]) {
 		return 0;
 	}
 
-	// get options
-
-	// Long options with getopt_long
-	const struct option longopts[] {
-		{ "help", no_argument, 0, '?' },
-		{ "version", no_argument, 0, 'V' },
-		{ "file", required_argument, 0, 'f' },
-		{ 0, 0, 0, 0 }
-	};
-
-	int opt { -1 };
-	int optIdx {};
-	while ((opt = getopt_long(argc, argv, "f:V", longopts, &optIdx)) != -1) {
-		switch (opt) {
-			case 'f':
-				std::cout << "f: file path: " << optarg << '\n';
-				break;
-			case 'V':
-				std::cout << "V: version 1.0" << '\n';
-				break;
-			case '?':
-				printHelp();
-				break;
-			default:
-				printUsage();
-				break;
-		}
-	}
-
 	// first non-opt arg is PATTERN
 	std::string_view pattern { argv[optind] };
 
