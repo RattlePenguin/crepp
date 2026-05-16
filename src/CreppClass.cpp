@@ -12,19 +12,22 @@ void CreppClass::getOptions(int argc, char *argv[]) {
 	int optIdx {};
 	while ((opt = getopt_long(argc, argv, "f:V", longopts, &optIdx)) != -1) {
 		switch (opt) {
-			case 'f':
-				std::cout << "f: file path: " << optarg << '\n';
-				break;
 			case 'V':
 				std::cout << "V: version 1.0" << '\n';
 				break;
+			case 'f':
+				std::cout << "f: file path: " << optarg << '\n';
+				break;
 			case 'v':
+				std::cout << "v: vInvert set to true" << '\n';
 				vInvert = true;
 				break;
 			case 'r':
+				std::cout << "r: recursive set to true" << '\n';
 				recursive = true;
 				break;
 			case '?':
+				std::cout << "?: print help" << '\n';
 				printHelp();
 				break;
 			default:
