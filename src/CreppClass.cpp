@@ -7,9 +7,18 @@
 void printUsage();
 void printHelp();
 
+void CreppClass::crepp(int argc, char *argv[]) {
+	getOptions(argc, argv);
+	getFilepaths(argc, argv);
+}
+
 void CreppClass::getOptions(int argc, char *argv[]) {
+	// Compare opt with flag char to obtain given opt
 	int opt { -1 };
+	// optIdx is updated to corresponding opt index in longopts
 	int optIdx {};
+	
+	// getopt_long reads longopts from Option.hpp
 	while ((opt = getopt_long(argc, argv, "f:V", longopts, &optIdx)) != -1) {
 		switch (opt) {
 			case 'V':
@@ -55,7 +64,6 @@ void printHelp() {
 	std::cout << "Example: crepp -i 'hello world' Menu.h main.cpp" << '\n';
 
 	// Options information
+	std::cout << "TODO Put options information here.\n";
 }
 
-void CreppClass::crepp(std::string filepath) {
-}
