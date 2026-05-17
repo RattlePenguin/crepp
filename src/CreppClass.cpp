@@ -8,8 +8,9 @@
 CreppClass::CreppClass(int argc, char *argv[]) {
 	if (argc <= 1) {
 		printUsage();
+	} else {
+		parseAll(argc, argv);
 	}
-	parseAll(argc, argv);
 }
 
 void CreppClass::run() {
@@ -19,21 +20,25 @@ void CreppClass::run() {
 }
 
 void CreppClass::crepp(std::string filepath) {
-	// check if arg is a file
 	std::ifstream file(filepath);
 
+	// Check if file exists
 	if (!file) {
 		std::cout << "crepp: " << filepath << ": No such file or directory\n";
 	}
 
+	// TODO check if file is a directory
+
 	std::string text {};
 	while (getline(file, text)) {
-		if (text.find(pattern) != std::string::npos) {
-			std::cout << text << '\n';
+		for (std::string pattern : patterns) {
+			// Substring matching
+			if (text.find(pattern) != std::string::npos) { // TODO text highlighting
+				std::cout << text << '\n';
+			}
 		}
 	}
 
-	// get each line and substring check
 	file.close();
 }
 
