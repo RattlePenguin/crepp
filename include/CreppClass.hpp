@@ -9,11 +9,17 @@ private:
 	bool vInvert {};
 	bool recursive {};
 
-	// PATTERN
+	// Vector of PATTERN
 	std::vector<std::string> patterns {};
 
-	// FILE
+	// Vector of FILE
 	std::vector<std::string> filepaths {};
+
+	/**
+	 *  Initialises the class using argc and argv.
+	 *  Parses options, patterns and file paths, then performs crepp on each file.
+	 */
+	void initialise(int argc, char *argv[]);
 
 	/**
 	 *  Performs crepp on a given path.
@@ -27,10 +33,10 @@ private:
 	/**
 	 *  Retrieves options from argv.
 	 */
-	void getOptions(int argc, char *argv[]);
+	void parseOptions(int argc, char *argv[]);
 	
 	/**
 	 *  Retrieves filepaths from argv.
 	 */
-	void getFilepaths(int argc, char *argv[], int optind);
+	void parseFilepaths(int argc, char *argv[], int optind);
 };

@@ -7,12 +7,16 @@
 void printUsage();
 void printHelp();
 
-void CreppClass::crepp(int argc, char *argv[]) {
+void CreppClass::initialise(int argc, char *argv[]) {
 	getOptions(argc, argv);
 	getFilepaths(argc, argv);
+
+	for (std::string filepath : filepaths) {
+		crepp(filepath);
+	}
 }
 
-void CreppClass::getOptions(int argc, char *argv[]) {
+void CreppClass::parseOptions(int argc, char *argv[]) {
 	// Compare opt with flag char to obtain given opt
 	int opt { -1 };
 	// optIdx is updated to corresponding opt index in longopts
