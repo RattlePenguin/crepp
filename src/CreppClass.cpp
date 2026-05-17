@@ -1,16 +1,15 @@
 #include "CreppClass.hpp"
 #include "Option.hpp"
+#include "print.hpp"
 
 #include <iostream>
-
-// Forward declarations
-void printUsage();
-void printHelp();
+#include <fstream>
 
 CreppClass::CreppClass(int argc, char *argv[]) {
-	parseOptions(argc, argv);
-	parseFilepaths(argc, argv);
-
+	if (argc <= 1) {
+		printUsage();
+	}
+	parseAll(argc, argv);
 }
 
 void CreppClass::run() {
@@ -19,7 +18,31 @@ void CreppClass::run() {
 	}
 }
 
-void CreppClass::parseOptions(int argc, char *argv[]) {
+void CreppClass::crepp(std::string filepath) {
+	// check if arg is a file
+	std::ifstream file(filepath);
+
+	if (!file) {
+		std::cout << "crepp: " << filepath << ": No such file or directory\n";
+	}
+
+	std::string text {};
+	while (getline(file, text)) {
+		if (text.find(pattern) != std::string::npos) {
+			std::cout << text << '\n';
+		}
+	}
+
+	// get each line and substring check
+	file.close();
+}
+
+void CreppClass::parseAll(int argc, char *argv[]) {
+	parseOptions(argc, argv);
+	parseFilepaths(argc, argv);
+}
+
+int CreppClass::parseOptions(int argc, char *argv[]) {
 	// Compare opt with flag char to obtain given opt
 	int opt { -1 };
 	// optIdx is updated to corresponding opt index in longopts
@@ -53,30 +76,10 @@ void CreppClass::parseOptions(int argc, char *argv[]) {
 	}
 }
 
-/**
- *  Prints usage message.
- */
-void printUsage() {
-	std::cout << "Usage: 'crepp [FILE]'" << '\n';
-	std::cout << "Try: 'crepp --help' for more information." << '\n';
-}
-
-/**
- *  Prints help message.
- */
-void printHelp() {
-	// Basic information
-	std::cout << "Usage: crepp [OPTION]... PATTERNS [FILE]..." << '\n';
-	std::cout << "Search for PATTERNS in each FILE." << '\n';
-	std::cout << "Example: crepp -i 'hello world' Menu.h main.cpp" << '\n';
-
-	// Options information
-	std::cout << "TODO Put options information here.\n";
-}
-
 void parsePattern(int argc, char *argv[]) {
 }
 
 void parseFilepaths(int argc, char *argv[]) {
 	
 }
+
