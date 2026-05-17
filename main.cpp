@@ -6,6 +6,6 @@
 
 int main(int argc, char *argv[]) {
 	std::unique_ptr<CreppClass> creppInstance { std::make_unique<CreppClass>(argc, argv) };
-	creppInstance.run();
+	creppInstance->run();
 }
 

@@ -1,3 +1,4 @@
+#pragma once
 /**
  *  Thinking of mapping shortopts to longopts using a hashmap
  *  How to also do no_argument / etc, flag field and val

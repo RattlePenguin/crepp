@@ -14,6 +14,7 @@ CreppClass::CreppClass(int argc, char *argv[]) {
 }
 
 void CreppClass::run() {
+	if (!runnable) return;
 	for (std::string filepath : filepaths) {
 		crepp(filepath);
 	}
@@ -43,11 +44,16 @@ void CreppClass::crepp(std::string filepath) {
 }
 
 void CreppClass::parseAll(int argc, char *argv[]) {
-	parseOptions(argc, argv);
-	parseFilepaths(argc, argv);
+	if (!parseOptions(argc, argv)) return;
+	
+	std::string pattern { argv[optind++] };
+	for (; optind < argc; ++optind) {
+		crepp(argv[optind]);
+	}
+	// parseFilepaths(argc, argv);
 }
 
-int CreppClass::parseOptions(int argc, char *argv[]) {
+bool CreppClass::parseOptions(int argc, char *argv[]) {
 	// Compare opt with flag char to obtain given opt
 	int opt { -1 };
 	// optIdx is updated to corresponding opt index in longopts
@@ -57,8 +63,8 @@ int CreppClass::parseOptions(int argc, char *argv[]) {
 	while ((opt = getopt_long(argc, argv, "f:V", longopts, &optIdx)) != -1) {
 		switch (opt) {
 			case 'V':
-				std::cout << "V: version 1.0" << '\n';
-				break;
+				std::cout << "V: version 1.0" << '\n'; // printVersion
+				return false;
 			case 'f':
 				std::cout << "f: file path: " << optarg << '\n';
 				break;
@@ -70,21 +76,17 @@ int CreppClass::parseOptions(int argc, char *argv[]) {
 				std::cout << "r: recursive set to true" << '\n';
 				recursive = true;
 				break;
-			case '?':
-				std::cout << "?: print help" << '\n';
+			case OPT_HELP:
 				printHelp();
-				break;
+				return false;
 			default:
+				std::cout << "crepp: invalid option -- '" << argv[optind - 1] << "'\n";
 				printUsage();
-				break;
+				return false;
 		}
 	}
+
+	return optind;
 }
 
-void parsePattern(int argc, char *argv[]) {
-}
-
-void parseFilepaths(int argc, char *argv[]) {
-	
-}
 

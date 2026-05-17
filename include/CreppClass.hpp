@@ -19,6 +19,7 @@ public:
 	void run();
 
 private:
+	// Prerequisite check, if false nothing happens
 	bool runnable {};
 
 	// Option toggles
@@ -47,9 +48,9 @@ private:
 
 	/**
 	 *  Retrieves options from argv.
-	 *  Returns the index of the first non-option argument, i.e. PATTERN
+	 *  Returns false if an unknown option or terminating option was found.
 	 */
-	int parseOptions(int argc, char *argv[]);
+	bool parseOptions(int argc, char *argv[]);
 
 	/**
 	 *  Retrieves PATTERN from argv.
