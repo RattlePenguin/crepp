@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Option.hpp"
+
 #include <vector>
 #include <string>
 
@@ -17,7 +19,9 @@ public:
 	void run();
 
 private:
-	// Toggles
+	bool runnable {};
+
+	// Option toggles
 	bool vInvert {};
 	bool recursive {};
 
