@@ -7,10 +7,13 @@
 void printUsage();
 void printHelp();
 
-void CreppClass::initialise(int argc, char *argv[]) {
-	getOptions(argc, argv);
-	getFilepaths(argc, argv);
+CreppClass::CreppClass(int argc, char *argv[]) {
+	parseOptions(argc, argv);
+	parseFilepaths(argc, argv);
 
+}
+
+void CreppClass::run() {
 	for (std::string filepath : filepaths) {
 		crepp(filepath);
 	}
@@ -71,3 +74,9 @@ void printHelp() {
 	std::cout << "TODO Put options information here.\n";
 }
 
+void parsePattern(int argc, char *argv[]) {
+}
+
+void parseFilepaths(int argc, char *argv[]) {
+	
+}

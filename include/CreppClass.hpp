@@ -3,6 +3,11 @@
 
 class CreppClass {
 public:
+	/**
+	 *  Initialises the class using argc and argv.
+	 *  Parses options, patterns and file paths.
+	 */
+	CreppClass(int argc, char *argv[]);
 
 private:
 	// Toggles
@@ -16,10 +21,9 @@ private:
 	std::vector<std::string> filepaths {};
 
 	/**
-	 *  Initialises the class using argc and argv.
-	 *  Parses options, patterns and file paths, then performs crepp on each file.
+	 *  Performs crepp on each file path in filepaths.
 	 */
-	void initialise(int argc, char *argv[]);
+	void run();
 
 	/**
 	 *  Performs crepp on a given path.
@@ -34,9 +38,16 @@ private:
 	 *  Retrieves options from argv.
 	 */
 	void parseOptions(int argc, char *argv[]);
+
+	/**
+	 *  Retrieves PATTERN from argv.
+	 *  Assumes optind has been placed at the first file path.
+	 */
+	void parsePattern(int argc, char *argv[]);
 	
 	/**
 	 *  Retrieves filepaths from argv.
+	 *  Assumes optind has been placed at the first file path.
 	 */
-	void parseFilepaths(int argc, char *argv[], int optind);
+	void parseFilepaths(int argc, char *argv[]);
 };
