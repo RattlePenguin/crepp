@@ -1,5 +1,6 @@
 # TODOs
 color highlighting for specific part of line
+- find index of start of patterns, for length mark color
 
 if given filename is a directory, quit out unless -r
 
