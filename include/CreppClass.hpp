@@ -60,6 +60,7 @@ private:
 	/**
 	 *  Retrieves filepaths from argv.
 	 *  Assumes optind has been placed at the first file path.
+	 *  If path leads to a directory and recursive is true, recursively parse filepaths inside.
 	 */
 	void parseFilepaths(int argc, char *argv[]);
 };
