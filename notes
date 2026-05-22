@@ -5,6 +5,7 @@ color highlighting for specific part of line
 if given filename is a directory, quit out unless -r
 
 -f take PATTERN from file
+	if used, don't take pattern from first non-opt arg
 	separated by newlines, multiple matching
 	can use multiple files aggregately
 -v for invert matching

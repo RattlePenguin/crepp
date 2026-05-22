@@ -92,6 +92,10 @@ void CreppClass::parseOptions(int argc, char *argv[]) {
 	}
 }
 
+void CreppClass::parsePatterns(int argc, char *argv[]) {
+
+}
+
 void CreppClass::parseFilepaths(int argc, char *argv[]) {
 	for (int i = optind; i < argc; ++i) {
 		filepaths.push_back(argv[i]);
