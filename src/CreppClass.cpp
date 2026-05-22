@@ -14,7 +14,10 @@ CreppClass::CreppClass(int argc, char *argv[]) {
 }
 
 void CreppClass::run() {
-	if (!runnable) return;
+	if (!runnable) {
+		std::cout << "Crepp could not run.\n";
+		return;
+	}
 	for (std::string filepath : filepaths) {
 		crepp(filepath);
 	}
@@ -44,16 +47,14 @@ void CreppClass::crepp(std::string filepath) {
 }
 
 void CreppClass::parseAll(int argc, char *argv[]) {
-	if (!parseOptions(argc, argv)) return;
-	
-	std::string pattern { argv[optind++] };
-	for (; optind < argc; ++optind) {
-		crepp(argv[optind]);
-	}
-	// parseFilepaths(argc, argv);
+	parseOptions(argc, argv);
+	parseFilepaths(argc, argv);
 }
 
-bool CreppClass::parseOptions(int argc, char *argv[]) {
+void CreppClass::parseOptions(int argc, char *argv[]) {
+	// Set true to start with, invalid / terminating options will set false
+	runnable = true;
+
 	// Compare opt with flag char to obtain given opt
 	int opt { -1 };
 	// optIdx is updated to corresponding opt index in longopts
@@ -62,11 +63,17 @@ bool CreppClass::parseOptions(int argc, char *argv[]) {
 	// getopt_long reads longopts from Option.hpp
 	while ((opt = getopt_long(argc, argv, "f:V", longopts, &optIdx)) != -1) {
 		switch (opt) {
-			case 'V':
+			case 'V': // terminating
 				std::cout << "V: version 1.0" << '\n'; // printVersion
-				return false;
+				runnable = false;
+				return;
+			case OPT_HELP: // terminating
+				printHelp();
+				runnable = false;
+				return;
 			case 'f':
-				std::cout << "f: file path: " << optarg << '\n';
+				std::cout << "f: taking patterns from file path: " << optarg << '\n';
+				// TODO add to patterns 
 				break;
 			case 'v':
 				std::cout << "v: vInvert set to true" << '\n';
@@ -76,17 +83,13 @@ bool CreppClass::parseOptions(int argc, char *argv[]) {
 				std::cout << "r: recursive set to true" << '\n';
 				recursive = true;
 				break;
-			case OPT_HELP:
-				printHelp();
-				return false;
-			default:
+			default: // invalid
 				std::cout << "crepp: invalid option -- '" << argv[optind - 1] << "'\n";
 				printUsage();
-				return false;
+				runnable = false;
+				return;
 		}
 	}
-
-	return optind;
 }
 
 void CreppClass::parseFilepaths(int argc, char *argv[]) {

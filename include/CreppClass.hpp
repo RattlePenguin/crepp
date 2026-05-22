@@ -14,12 +14,15 @@ public:
 	CreppClass(int argc, char *argv[]);
 
 	/**
-	 *  Performs crepp on each file path in filepaths.
+	 *  Runs the main program.
+	 *  If runnable, performs crepp on each file in filepaths.
+	 *  Otherwise, does nothing.
+	 *	Errors should have been produced at initialisation.
 	 */
 	void run();
 
 private:
-	// Prerequisite check, if false nothing happens
+	// Prerequisite check, set to false on error
 	bool runnable {};
 
 	// Option toggles
@@ -50,7 +53,7 @@ private:
 	 *  Retrieves options from argv.
 	 *  Returns false if an unknown option or terminating option was found.
 	 */
-	bool parseOptions(int argc, char *argv[]);
+	void parseOptions(int argc, char *argv[]);
 
 	/**
 	 *  Retrieves PATTERN from argv.
