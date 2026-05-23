@@ -96,6 +96,12 @@ void CreppClass::parsePattern(int argc, char *argv[]) {
 	if (!filepaths.empty()) return; // TODO should this be the check for -f?
 	if (optind >= argc) return;
 	patterns.push_back(argv[optind++]);
+	
+	// DEBUG
+	std::cout << "Patterns:\n";
+	for (std::string s : patterns) {
+		std::cout << s << '\n';
+	}
 }
 
 void CreppClass::parseFilepaths(int argc, char *argv[]) {
