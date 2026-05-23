@@ -57,6 +57,7 @@ private:
 
 	/**
 	 *  Retrieves PATTERN from argv.
+	 *  If -f flag was triggered, does nothing.
 	 */
 	void parsePattern(int argc, char *argv[]);
 	

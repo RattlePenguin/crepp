@@ -92,11 +92,17 @@ void CreppClass::parseOptions(int argc, char *argv[]) {
 	}
 }
 
-void CreppClass::parsePatterns(int argc, char *argv[]) {
-
+void CreppClass::parsePattern(int argc, char *argv[]) {
+	if (!filepaths.empty()) return; // TODO should this be the check for -f?
+	if (optind >= argc) return;
+	patterns.push_back(argv[optind++]);
 }
 
 void CreppClass::parseFilepaths(int argc, char *argv[]) {
+	// If no files are given, read from stdin
+	
+
+
 	for (int i = optind; i < argc; ++i) {
 		filepaths.push_back(argv[i]);
 	}
