@@ -48,6 +48,7 @@ void CreppClass::crepp(std::string filepath) {
 
 void CreppClass::parseAll(int argc, char *argv[]) {
 	parseOptions(argc, argv);
+	parsePattern(argc, argv);
 	parseFilepaths(argc, argv);
 }
 
@@ -110,5 +111,11 @@ void CreppClass::parseFilepaths(int argc, char *argv[]) {
 
 	for (int i = optind; i < argc; ++i) {
 		filepaths.push_back(argv[i]);
+	}
+
+	// DEBUG
+	std::cout << "Filepaths:\n";
+	for (std::string s : filepaths) {
+		std::cout << s << '\n';
 	}
 }
