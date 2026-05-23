@@ -13,10 +13,7 @@ if given filename is a directory, quit out unless -r
 -r for recursive searching
 	if given a directory perform on all files within
 
-Idea since performing crepp on a file is the same, just given multiple files
-Make class CreppInstance
-- Keep track of flags like -v, -e
-- For each file arg, just call member function on it
-	- Member func will check whether its a file or not
-
-Give error for flag not found
+[23/05/2026]
+Good, main functionality is ok and works on simple inputs, no flags tested yet
+compare with original output
+for next, make easy CMake build option and make README
