@@ -99,9 +99,8 @@ void CreppClass::parsePattern(int argc, char *argv[]) {
 }
 
 void CreppClass::parseFilepaths(int argc, char *argv[]) {
-	// If no files are given, read from stdin
-	
-
+	// TODO If no files are given, read from stdin
+	if (optind >= argc) return;
 
 	for (int i = optind; i < argc; ++i) {
 		filepaths.push_back(argv[i]);
