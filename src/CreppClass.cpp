@@ -1,6 +1,6 @@
-#include "CreppClass.hpp"
-#include "Option.hpp"
-#include "print.hpp"
+#include "../include/CreppClass.hpp"
+#include "../include/Option.hpp"
+#include "../include/print.hpp"
 
 #include <iostream>
 #include <fstream>
