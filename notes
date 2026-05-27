@@ -18,3 +18,5 @@ if given filename is a directory, quit out unless -r
 Good, main functionality is ok and works on simple inputs, no flags tested yet
 compare with original output
 for next, make easy CMake build option and make README
+
+CMake done, build works
