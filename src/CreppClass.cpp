@@ -5,6 +5,10 @@
 #include <iostream>
 #include <fstream>
 
+// For recursive -r
+#include <filesystem>
+namespace fs { std::filesystem };
+
 CreppClass::CreppClass(int argc, char *argv[]) {
 	if (argc <= 1) {
 		printUsage();
@@ -30,8 +34,6 @@ void CreppClass::crepp(std::string filepath) {
 	if (!file) {
 		std::cout << "crepp: " << filepath << ": No such file or directory\n";
 	}
-
-	// TODO check if file is a directory
 
 	std::string text {};
 	while (getline(file, text)) {
@@ -110,6 +112,11 @@ void CreppClass::parseFilepaths(int argc, char *argv[]) {
 	if (optind >= argc) return;
 
 	for (int i = optind; i < argc; ++i) {
+		fs::path fsPath { argv[i] };
+		if (fs::is_directory(fsPath) && recursive) {
+			parseDirectory(argv[i]);
+		}
+
 		filepaths.push_back(argv[i]);
 	}
 
